@@ -6,8 +6,8 @@
 
 
 .card-content{
-    
-    display: flex;
+    display: grid;
+    grid-template-columns: 88% auto;
     width: 550px;
     height: 90px;
     padding: 0 0 0 26px;
@@ -19,7 +19,7 @@
 }
 
 .card-body{
-   
+    grid-column: 1/2;
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -51,6 +51,7 @@
 }
 
 .fav-container{
+    grid-column: 2/3;
     display: flex;
     justify-content: center;
     align-items: center;
