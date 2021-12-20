@@ -6,6 +6,7 @@
 }
 .bg-color{
   background-color: #fcfcfc;
+  height: 100%;
 }
 a {
   text-decoration: none;
@@ -31,6 +32,8 @@ img {
 .App {
   display: grid;
   grid-template-columns: 50% 50%;
+  background-color: #fcfcfc;
+  height: 80vh;
   
 }
 

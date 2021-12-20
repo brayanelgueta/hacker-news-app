@@ -15,10 +15,8 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(8)
- 
-    const indexOfLastPost = currentPage * postsPerPage
-    const indexOfFirstPost = indexOfLastPost - postsPerPage
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+    const [favorites, setFavorites] = useState([])
+   
 
     const pageNumbers = []
 
@@ -27,24 +25,23 @@ export default function Home() {
       
     }
 
- 
+    const addFav = (id, author, title, url) =>{
+        const favFiltered = favorites.filter(fav => fav.id !== id)
+        setFavorites([...favFiltered, {id, author, title, url}])
+    }
 
-    const Previous = () => {
-      const prevPage = currentPage - 1
-      setCurrentPage(prevPage)
-    } 
+    const removeFav = (id) => {
+      console.log(id)
+      const eliminateFav = favorites.filter(item => item.id !== id)
+      console.log(eliminateFav)
+      setFavorites(eliminateFav)
+    }
 
-    const Next = () => {
-      const nextPage = currentPage + 1
-      setCurrentPage(nextPage)
-    } 
+    localStorage.setItem('favorites', JSON.stringify(favorites))
 
-    for(let i = 1; i <= Math.ceil(posts.length / postsPerPage); i++){
-      pageNumbers.push(i)
-  }
+  console.log(favorites)
 
-    
-  
+
     useEffect(() => {
         setLoading(true)
         axios.get(`https://hn.algolia.com/api/v1/search_by_date?query=${selection}&page=${currentPage}`)
@@ -53,8 +50,24 @@ export default function Home() {
             setPosts(res.hits)
             setLoading(false)
           })
+      
     }, [selection, currentPage])
-    console.log(posts)
+
+    const postsFiltered = 
+    posts.filter(element => 
+      element.author && element.story_url && element.story_title
+    )
+  
+    const indexOfLastPost = currentPage * postsPerPage
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const currentPosts = postsFiltered.slice(indexOfFirstPost, indexOfLastPost)
+
+    for(let i = 1; i <= Math.ceil(posts.length / postsPerPage); i++){
+      pageNumbers.push(i)
+  }
+
+   
+  
     return (
       <div className="App">
 
@@ -64,10 +77,11 @@ export default function Home() {
 
         {
           loading === true ?
-          
-          <div class="pulse-effect">
-            <div></div>
-            <div></div>
+          <div className="loading-page">
+            <div className="pulse-effect">
+              <div></div>
+              <div></div>
+            </div>
           </div>
           :
             <div className="news-card-container">
@@ -80,6 +94,9 @@ export default function Home() {
                               title={item.story_title}
                               url={item.story_url}
                               id={item.objectID}
+                              date={item.created_at}
+                              addFav={addFav}
+                              removeFav={removeFav}
                             />
                           )           
                         })
@@ -93,10 +110,9 @@ export default function Home() {
           
           <Pagination 
             postsPerPage={postsPerPage} 
-            totalPosts={posts.length} 
+            totalPosts={postsFiltered.length} 
             paginate={paginate}
-            Previous={Previous}
-            Next={Next}
+          
             currentPage={currentPage}
            />
         </div>

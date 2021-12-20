@@ -19,12 +19,14 @@
     font-style: normal;
     line-height: 1.57;
     letter-spacing: normal;
+   
 }
 
 .item:hover{
     color: #fff;
     background-color: #1890ff;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .active{
