@@ -3,12 +3,10 @@ import React, { useEffect, useState } from 'react'
 import NewsCard from '../components/news/NewsCard'
 
 export default function Faves() {
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState(JSON.parse(localStorage.getItem('favorites')) || [])
     const [loading, setLoading] = useState(false)
     useEffect(() => {
-      setLoading(true)
-      setPosts(JSON.parse(localStorage.getItem('favorites')))
-      setLoading(false)
+   
     }, [])
     console.log(posts)
 
@@ -19,7 +17,7 @@ export default function Faves() {
       
     // }
     return (
-        <div className="news-card-container">
+        <div className="">
           {
             loading === true ? 
               <div className="loading-page">
@@ -39,6 +37,7 @@ export default function Faves() {
                               title={item.title}
                               url={item.url}
                               id={item.id}
+                              
                             
                             />
                           )           

@@ -15,7 +15,7 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(8)
-    const [favorites, setFavorites] = useState([])
+    const [favorites, setFavorites] = useState(JSON.parse(localStorage.getItem('favorites')) ||  [])
    
 
     const pageNumbers = []
@@ -27,6 +27,8 @@ export default function Home() {
 
     const addFav = (id, author, title, url) =>{
         const favFiltered = favorites.filter(fav => fav.id !== id)
+        console.log(favFiltered)
+       
         setFavorites([...favFiltered, {id, author, title, url}])
     }
 
@@ -53,8 +55,7 @@ export default function Home() {
       
     }, [selection, currentPage])
 
-    const postsFiltered = 
-    posts.filter(element => 
+    const postsFiltered = posts.filter(element => 
       element.author && element.story_url && element.story_title
     )
   
