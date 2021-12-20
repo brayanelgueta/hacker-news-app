@@ -65,7 +65,10 @@ export default function Home() {
         {
           loading === true ?
           
-            <h1>Loading</h1>
+          <div class="pulse-effect">
+            <div></div>
+            <div></div>
+          </div>
           :
             <div className="news-card-container">
                       {
