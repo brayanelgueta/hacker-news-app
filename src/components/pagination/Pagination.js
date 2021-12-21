@@ -4,6 +4,7 @@ import ReactPaginate from 'react-paginate'
 export default function Pagination({ postsPerPage, totalPosts, paginate, currentPage}) {
 
     const [pageNumber,setPageNumber] = useState(1)
+    console.log(pageNumber)
     const pageNumbers = Math.ceil(totalPosts / postsPerPage)
     
     const selectedPage = ({selected}) => {
