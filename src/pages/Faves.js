@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import React, { useEffect, useState } from 'react'
 import NewsCard from '../components/news/NewsCard'
+import './pagesCss/Home.css'
 
 export default function Faves() {
     const [posts, setPosts] = useState([])
@@ -12,14 +13,9 @@ export default function Faves() {
     }, [])
     console.log(posts)
 
-    // const removeFav = (id) => {
-    //   console.log(id)
-    //   const eliminateFav = favorites.filter(item => item.id !== id)
-    //   console.log(eliminateFav)
-      
-    // }
+   
     return (
-        <div className="news-card-container">
+        <div>
           {
             loading === true ? 
               <div className="loading-page">
@@ -39,6 +35,7 @@ export default function Faves() {
                               title={item.title}
                               url={item.url}
                               id={item.id}
+                              date={item.date}
                             
                             />
                           )           

@@ -25,9 +25,9 @@ export default function Home() {
       
     }
 
-    const addFav = (id, author, title, url) =>{
+    const addFav = (id, author, title, url, date) =>{
         const favFiltered = favorites.filter(fav => fav.id !== id)
-        setFavorites([...favFiltered, {id, author, title, url}])
+        setFavorites([...favFiltered, {id, author, title, url, date}])
     }
 
     const removeFav = (id) => {
@@ -85,23 +85,23 @@ export default function Home() {
           </div>
           :
             <div className="news-card-container">
-                      {
-                        currentPosts.map((item, index) => {
-                          return (
-                            <NewsCard 
-                              key={index}
-                              author={item.author}
-                              title={item.story_title}
-                              url={item.story_url}
-                              id={item.objectID}
-                              date={item.created_at}
-                              addFav={addFav}
-                              removeFav={removeFav}
-                            />
-                          )           
-                        })
-                      }
-                    </div>
+              {
+                currentPosts.map((item, index) => {
+                  return (
+                    <NewsCard 
+                      key={index}
+                      author={item.author}
+                      title={item.story_title}
+                      url={item.story_url}
+                      id={item.objectID}
+                      date={item.created_at}
+                      addFav={addFav}
+                      removeFav={removeFav}
+                    />
+                  )           
+                })
+              }
+            </div>
         }
 
         
