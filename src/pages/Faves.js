@@ -1,23 +1,26 @@
 /* eslint-disable react/jsx-no-undef */
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import NewsCard from '../components/news/NewsCard'
+import Pagination from '../components/pagination/Pagination';
+import './pagesCss/Home.css'
 
 export default function Faves() {
     const [posts, setPosts] = useState(JSON.parse(localStorage.getItem('favorites')) || [])
     const [loading, setLoading] = useState(false)
-    useEffect(() => {
-   
-    }, [])
-    console.log(posts)
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerPage] = useState(8)
+    
 
-    // const removeFav = (id) => {
-    //   console.log(id)
-    //   const eliminateFav = favorites.filter(item => item.id !== id)
-    //   console.log(eliminateFav)
+    const paginate = (pageNumber) => {
+      setCurrentPage(pageNumber)
       
-    // }
+    }
+    const indexOfLastPost = currentPage * postsPerPage
+    const indexOfFirstPost = indexOfLastPost - postsPerPage
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+   
     return (
-        <div className="">
+        <div className="App">
           {
             loading === true ? 
               <div className="loading-page">
@@ -29,7 +32,7 @@ export default function Faves() {
             :
             <div className="news-card-container">
                       {
-                        posts.map((item, index) => {
+                        currentPosts.map((item, index) => {
                           return (
                             <NewsCard 
                               key={index}
@@ -37,7 +40,7 @@ export default function Faves() {
                               title={item.title}
                               url={item.url}
                               id={item.id}
-                              
+                              date={item.date}
                             
                             />
                           )           
@@ -46,6 +49,18 @@ export default function Faves() {
                     </div>
           }
         
+
+        <div className="pagination">
+          
+          <Pagination 
+            postsPerPage={postsPerPage} 
+            totalPosts={posts.length} 
+            paginate={paginate}
+          
+            currentPage={currentPage}
+           />
+        </div>
+  
        
       </div>
     )

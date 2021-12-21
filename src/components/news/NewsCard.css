@@ -8,22 +8,27 @@
 .card-content{
     display: grid;
     grid-template-columns: 88% auto;
-    width: 550px;
+    width: 90%;
     height: 90px;
-    padding: 0 0 0 26px;
-    opacity: 0.8;
+    padding: 0;
+    margin: auto;
+    opacity: 0.9;
     border-radius: 6px;
     border: solid 1px #979797;
     background-color: #fff;
     
 }
-
+.card-content:hover{
+    opacity: 0.6;
+}
 .card-body{
     grid-column: 1/2;
     display: flex;
     flex-direction: column;
     background-color: #fff;
     justify-content: center;
+    padding-left: 26px;
+    border-radius: 6px;
 }
 .timestamp{
     display: flex;
@@ -39,7 +44,7 @@
 
 .description p{
     margin-right: 30px;
-    margin: 6px 31px 14px 0;
+    margin: 6px 31px 0 0;
     font-family: Roboto;
     font-size: 14px;
     font-weight: 500;
@@ -55,10 +60,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 68px;
-    height: 90px;
-    margin: 0 0 0 0;
-    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0 6px 6px 0;
     background: rgba(96,96,96, 0.06)
 }
 

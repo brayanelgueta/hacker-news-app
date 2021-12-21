@@ -11,7 +11,7 @@ import Pagination from '../components/pagination/Pagination';
 export default function Home() {
 
     const [posts, setPosts] = useState([])
-    const [selection, setSelection] = useState('')
+    const [selection, setSelection] = useState(JSON.parse(localStorage.getItem('selectedItem')) || '')
     const [loading, setLoading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(8)
@@ -25,11 +25,9 @@ export default function Home() {
       
     }
 
-    const addFav = (id, author, title, url) =>{
+    const addFav = (id, author, title, url, date) =>{
         const favFiltered = favorites.filter(fav => fav.id !== id)
-        console.log(favFiltered)
-       
-        setFavorites([...favFiltered, {id, author, title, url}])
+        setFavorites([...favFiltered, {id, author, title, url, date}])
     }
 
     const removeFav = (id) => {
@@ -73,7 +71,8 @@ export default function Home() {
       <div className="App">
 
         <div className="filters">
-            <Filter handleSelection={selection =>  setSelection(selection)}/>
+            <Filter handleSelection={selection =>  {setSelection(selection) 
+              localStorage.setItem('selectedItem', JSON.stringify(selection))}}/>
         </div>
 
         {
@@ -86,23 +85,23 @@ export default function Home() {
           </div>
           :
             <div className="news-card-container">
-                      {
-                        currentPosts.map((item, index) => {
-                          return (
-                            <NewsCard 
-                              key={index}
-                              author={item.author}
-                              title={item.story_title}
-                              url={item.story_url}
-                              id={item.objectID}
-                              date={item.created_at}
-                              addFav={addFav}
-                              removeFav={removeFav}
-                            />
-                          )           
-                        })
-                      }
-                    </div>
+              {
+                currentPosts.map((item, index) => {
+                  return (
+                    <NewsCard 
+                      key={index}
+                      author={item.author}
+                      title={item.story_title}
+                      url={item.story_url}
+                      id={item.objectID}
+                      date={item.created_at}
+                      addFav={addFav}
+                      removeFav={removeFav}
+                    />
+                  )           
+                })
+              }
+            </div>
         }
 
         

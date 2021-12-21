@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './Pagination.css'
 import ReactPaginate from 'react-paginate'
-export default function Pagination({ postsPerPage, totalPosts, paginate}) {
+export default function Pagination({ postsPerPage, totalPosts, paginate, currentPage}) {
 
     const [pageNumber,setPageNumber] = useState(1)
     const pageNumbers = Math.ceil(totalPosts / postsPerPage)
