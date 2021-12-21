@@ -8,8 +8,8 @@ The app consumes a "Hack News API" to make a list of cards with one of them, als
 
 ## Instalation
 1. Clone this project
-2. Once inside the project folder, open a terminal and type ### npm i
-3. Finally run ###npm run start
+2. Once inside the project folder, open a terminal and type `npm i`
+3. Finally run `npm run start`
 
 
 
