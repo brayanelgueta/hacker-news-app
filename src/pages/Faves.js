@@ -5,8 +5,8 @@ import Pagination from '../components/pagination/Pagination';
 import './pagesCss/Home.css'
 
 export default function Faves() {
-    const [posts, setPosts] = useState(JSON.parse(localStorage.getItem('favorites')) || [])
-    const [loading, setLoading] = useState(false)
+    const [posts] = useState(JSON.parse(localStorage.getItem('favorites')) || [])
+    const [loading] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerPage] = useState(8)
     

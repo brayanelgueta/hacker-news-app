@@ -42,7 +42,7 @@ const handleFav = (id, author, title, url, date) => {
 useEffect(() => {
     
     timeSince()
-}, [])
+}, )
 
     return (
         
